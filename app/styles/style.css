@@ -1,0 +1,81 @@
+html,
+body {
+  scroll-behavior: smooth;
+  height: 100%;
+  margin: 0;
+}
+
+section {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  min-height: 100vh; /* Tetap gunakan min-height agar konten bisa lebih panjang */
+  position: relative;
+  scroll-margin-top: 0; /* Memastikan snap tepat di awal section */
+}
+
+.content {
+  scroll-snap-type: y mandatory; /* Kembalikan ke mandatory untuk memastikan snap bekerja */
+  overflow-y: auto;
+  height: 100vh;
+  -webkit-overflow-scrolling: touch; /* Untuk dukungan iOS yang lebih baik */
+  scroll-padding: 1px; /* This helps with smoother snapping */
+}
+
+.animate-fade-in {
+  animation: fadeIn 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.animate-slide-up {
+  animation: slideUp 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.bg-grid-pattern {
+  background-image: linear-gradient(to right, rgba(255,255,255,.1) 1px, transparent 1px),
+                    linear-gradient(to bottom, rgba(255,255,255,.1) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+.floating-slow {
+  animation: floating 8s ease-in-out infinite;
+}
+
+.floating-medium {
+  animation: floating 6s ease-in-out infinite;
+  animation-delay: -2s;
+}
+
+.floating-fast {
+  animation: floating 4s ease-in-out infinite;
+  animation-delay: -1s;
+}
+
+@keyframes floating {
+  0%, 100% {
+    transform: translateY(0) translateX(0);
+  }
+  25% {
+    transform: translateY(-10px) translateX(10px);
+  }
+  50% {
+    transform: translateY(0) translateX(0);
+  }
+  75% {
+    transform: translateY(10px) translateX(-10px);
+  }
+}
