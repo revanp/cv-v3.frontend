@@ -43,10 +43,39 @@ export default function Index() {
   const nextPage = () => setCurrentPage((prev) => (prev + 1) % totalPages);
   const prevPage = () => setCurrentPage((prev) => (prev - 1 + totalPages) % totalPages);
 
+  useEffect(() => {
+    // Reveal animation on scroll
+    const observerReveal = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.reveal').forEach((el) => observerReveal.observe(el));
+
+    // Parallax effect
+    const handleScroll = () => {
+      document.querySelectorAll('.parallax').forEach((el) => {
+        const speed = el.getAttribute('data-speed') || '-0.5';
+        const yPos = (window.pageYOffset * Number(speed));
+        el.style.setProperty('--parallax-y', `${yPos}px`);
+      });
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      observerReveal.disconnect();
+    };
+  }, []);
+
   return (
     <div className="content">
       <section className="relative flex items-center justify-center bg-gradient-to-br from-[#0F172A] via-[#1E293B] to-[#0F172A]">
-        <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
+        <div className="absolute inset-0 bg-grid-pattern opacity-5 parallax" data-speed="0.2"></div>
         
         <div className="floating-elements">
           <div className="absolute top-20 left-[20%] w-24 h-24 rounded-full bg-gradient-to-r from-blue-500/10 to-cyan-500/10 blur-xl floating-slow"></div>
@@ -54,7 +83,7 @@ export default function Index() {
           <div className="absolute top-1/3 right-[30%] w-16 h-16 rounded-full bg-gradient-to-r from-emerald-500/10 to-teal-500/10 blur-xl floating-fast"></div>
         </div>
 
-        <div className="text-center space-y-5 transform hover:scale-105 transition-transform duration-300 relative z-10 py-8">
+        <div className="text-center space-y-5 transform hover:scale-105 transition-transform duration-300 relative z-10 py-8 reveal">
           <h1 className="text-6xl font-bold animate-fade-in bg-gradient-to-r from-blue-400 via-cyan-400 to-teal-400 text-transparent bg-clip-text leading-relaxed px-4">
             Hello, I&apos;m Revan Pratama
           </h1>
@@ -86,14 +115,14 @@ export default function Index() {
         </div>
       </section>
       <section className="relative flex items-center justify-center bg-gradient-to-br from-[#1E293B] via-[#0F172A] to-[#1E293B] overflow-hidden">
-        <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
+        <div className="absolute inset-0 bg-grid-pattern opacity-5 parallax" data-speed="0.3"></div>
         
         <div className="floating-elements">
           <div className="absolute top-[10%] right-[10%] w-24 h-24 rounded-full bg-gradient-to-r from-pink-500/10 to-purple-500/10 blur-xl floating-slow"></div>
           <div className="absolute bottom-[10%] left-[10%] w-32 h-32 rounded-full bg-gradient-to-r from-blue-500/10 to-cyan-500/10 blur-xl floating-medium"></div>
         </div>
 
-        <div className="max-w-6xl mx-auto px-4 py-12">
+        <div className="max-w-6xl mx-auto px-4 py-12 reveal">
           <div className="flex flex-col md:flex-row items-center gap-16">
             {/* Left Column - Image */}
             <div className="w-full md:w-1/2 animate-fade-in">
@@ -160,14 +189,14 @@ export default function Index() {
         </div>
       </section>
       <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-[#1E293B] via-[#0F172A] to-[#1E293B] overflow-hidden py-20">
-        <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
+        <div className="absolute inset-0 bg-grid-pattern opacity-5 parallax" data-speed="0.4"></div>
         
         <div className="floating-elements">
           <div className="absolute top-[20%] left-[15%] w-28 h-28 rounded-full bg-gradient-to-r from-blue-500/10 to-cyan-500/10 blur-xl floating-slow"></div>
           <div className="absolute bottom-[20%] right-[15%] w-36 h-36 rounded-full bg-gradient-to-r from-purple-500/10 to-pink-500/10 blur-xl floating-medium"></div>
         </div>
 
-        <div className="max-w-6xl mx-auto px-4">
+        <div className="max-w-6xl mx-auto px-4 reveal">
           <h2 className="text-4xl font-bold text-center bg-gradient-to-r from-blue-400 to-cyan-400 text-transparent bg-clip-text mb-16 animate-fade-in">
             My Skills
           </h2>
@@ -195,14 +224,14 @@ export default function Index() {
         </div>
       </section>
       <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-[#1E293B] via-[#0F172A] to-[#1E293B] overflow-hidden py-20">
-        <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
+        <div className="absolute inset-0 bg-grid-pattern opacity-5 parallax" data-speed="0.4"></div>
         
         <div className="floating-elements">
           <div className="absolute top-[25%] right-[20%] w-32 h-32 rounded-full bg-gradient-to-r from-blue-500/10 to-cyan-500/10 blur-xl floating-slow"></div>
           <div className="absolute bottom-[25%] left-[20%] w-40 h-40 rounded-full bg-gradient-to-r from-purple-500/10 to-pink-500/10 blur-xl floating-medium"></div>
         </div>
 
-        <div className="max-w-7xl mx-auto px-4">
+        <div className="max-w-7xl mx-auto px-4 reveal">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 text-transparent bg-clip-text animate-fade-in">
               Portfolio

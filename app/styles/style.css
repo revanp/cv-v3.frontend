@@ -5,12 +5,22 @@ body {
   margin: 0;
 }
 
+/* Improved smooth scroll */
+@media (prefers-reduced-motion: no-preference) {
+  .content {
+    scroll-behavior: smooth;
+    scroll-timeline: --page-scroll block;
+  }
+}
+
 section {
   scroll-snap-align: start;
   scroll-snap-stop: always;
   min-height: 100vh; /* Tetap gunakan min-height agar konten bisa lebih panjang */
   position: relative;
   scroll-margin-top: 0; /* Memastikan snap tepat di awal section */
+  transition: opacity 0.5s ease-in-out;
+  will-change: transform, opacity;
 }
 
 .content {
@@ -53,15 +63,18 @@ section {
 
 .floating-slow {
   animation: floating 8s ease-in-out infinite;
+  will-change: transform;
 }
 
 .floating-medium {
   animation: floating 6s ease-in-out infinite;
+  will-change: transform;
   animation-delay: -2s;
 }
 
 .floating-fast {
   animation: floating 4s ease-in-out infinite;
+  will-change: transform;
   animation-delay: -1s;
 }
 
@@ -78,4 +91,22 @@ section {
   75% {
     transform: translateY(10px) translateX(-10px);
   }
+}
+
+/* Scroll reveal animation */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 1s cubic-bezier(0.5, 0, 0, 1);
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Parallax effect */
+.parallax {
+  transform: translateY(var(--parallax-y, 0));
+  transition: transform 0.1s cubic-bezier(0.2, 0, 0, 1);
 }
