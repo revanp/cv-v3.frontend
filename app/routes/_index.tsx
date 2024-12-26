@@ -1,6 +1,6 @@
 import type { MetaFunction } from "@remix-run/node";
 import { FaGithub, FaLinkedin, FaEnvelope, FaChevronDown, FaExternalLinkAlt } from 'react-icons/fa';
-import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
+import { BsChevronLeft, BsChevronRight, BsCodeSlash, BsLightbulb, BsRocket, BsHeart } from 'react-icons/bs';
 import { SiTypescript, SiJavascript, SiReact, SiNodedotjs, SiPython, SiPhp, SiMysql, SiMongodb, SiTailwindcss, SiGit, SiDocker } from 'react-icons/si';
 import { useState, useEffect } from 'react';
 import '../styles/style.css';
@@ -42,6 +42,54 @@ export default function Index() {
 
   const nextPage = () => setCurrentPage((prev) => (prev + 1) % totalPages);
   const prevPage = () => setCurrentPage((prev) => (prev - 1 + totalPages) % totalPages);
+
+  const aboutCards = [
+    {
+      icon: BsCodeSlash,
+      title: "Tech Enthusiast",
+      description: "Passionate about clean code and innovative solutions",
+      gradient: "from-blue-400 to-cyan-400"
+    },
+    {
+      icon: BsLightbulb,
+      title: "Problem Solver",
+      description: "Turning complex challenges into elegant solutions",
+      gradient: "from-purple-400 to-pink-400"
+    },
+    {
+      icon: BsRocket,
+      title: "Fast Learner",
+      description: "Always eager to explore new technologies",
+      gradient: "from-emerald-400 to-teal-400"
+    },
+    {
+      icon: BsHeart,
+      title: "Team Player",
+      description: "Collaborating to create amazing experiences",
+      gradient: "from-orange-400 to-red-400"
+    }
+  ];
+
+  const timelineEvents = [
+    {
+      year: "2021",
+      title: "Senior Software Engineer",
+      company: "Current Company",
+      description: "Leading development of scalable web applications"
+    },
+    {
+      year: "2019",
+      title: "Full Stack Developer",
+      company: "Previous Company",
+      description: "Built robust backend services and modern frontends"
+    },
+    {
+      year: "2017",
+      title: "Started Coding Journey",
+      company: "Self-taught",
+      description: "Discovered my passion for programming"
+    }
+  ];
 
   useEffect(() => {
     // Reveal animation on scroll
@@ -122,68 +170,122 @@ export default function Index() {
           <div className="absolute bottom-[10%] left-[10%] w-32 h-32 rounded-full bg-gradient-to-r from-blue-500/10 to-cyan-500/10 blur-xl floating-medium"></div>
         </div>
 
-        <div className="max-w-6xl mx-auto px-4 py-12 reveal">
-          <div className="flex flex-col md:flex-row items-center gap-16">
-            {/* Left Column - Image */}
-            <div className="w-full md:w-1/2 animate-fade-in">
+        <div className="max-w-7xl mx-auto px-4 py-20">
+          <div className="text-center mb-16 reveal">
+            <h2 className="text-5xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 text-transparent bg-clip-text">
+              About Me
+            </h2>
+            <p className="text-slate-300 mt-4 text-lg">
+              A passionate developer with a creative mindset
+            </p>
+          </div>
+
+          {/* Personal Info Section - NEW */}
+          <div className="flex flex-col lg:flex-row items-center gap-12 mb-20 reveal">
+            <div className="lg:w-1/3">
               <div className="relative group">
-                {/* Decorative elements */}
                 <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-lg blur opacity-25 group-hover:opacity-75 transition duration-500"></div>
-                <div className="absolute -inset-2 bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-lg blur-xl opacity-25 group-hover:opacity-50 transition duration-500 animate-pulse"></div>
-                
-                {/* Image container */}
-                <div className="relative">
-                  <div className="aspect-square overflow-hidden rounded-lg border-2 border-slate-700/50 bg-[#1E293B]">
-                    <img 
-                      src="/revan.jpg" 
-                      alt="Revan Pratama" 
-                      className="w-full h-full object-cover transform group-hover:scale-105 transition duration-500 ease-out"
-                    />
-                  </div>
-                  
-                  {/* Corner accents */}
-                  <div className="absolute -top-1 -left-1 w-4 h-4 border-t-2 border-l-2 border-cyan-400"></div>
-                  <div className="absolute -top-1 -right-1 w-4 h-4 border-t-2 border-r-2 border-cyan-400"></div>
-                  <div className="absolute -bottom-1 -left-1 w-4 h-4 border-b-2 border-l-2 border-cyan-400"></div>
-                  <div className="absolute -bottom-1 -right-1 w-4 h-4 border-b-2 border-r-2 border-cyan-400"></div>
+                <div className="relative aspect-square rounded-lg overflow-hidden border-2 border-slate-700/50 group-hover:border-cyan-400/50 transition duration-300">
+                  <img 
+                    src="/revan.jpg" 
+                    alt="Revan Pratama"
+                    className="w-full h-full object-cover transform group-hover:scale-105 transition duration-500"
+                  />
                 </div>
               </div>
             </div>
             
-            {/* Right Column - Text Content */}
-            <div className="w-full md:w-1/2 space-y-8">
-              <h2 className="text-4xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 text-transparent bg-clip-text animate-fade-in">
-                About Me
-              </h2>
-              <div className="space-y-6 text-slate-300">
-                <p className="text-lg leading-relaxed animate-slide-up opacity-0" style={{ animationDelay: '200ms', animationFillMode: 'forwards' }}>
-                  My journey in software engineering started with a curiosity about how things work on the internet. Now, I&apos;m passionate about building scalable web applications and exploring new technologies.
-                </p>
-                <p className="text-lg leading-relaxed animate-slide-up opacity-0" style={{ animationDelay: '400ms', animationFillMode: 'forwards' }}>
-                  When I&apos;m not coding, you&apos;ll find me:
-                </p>
-                <ul className="space-y-3 list-none">
-                  {[
-                    "📚 Reading tech blogs and documentation",
-                    "🎮 Playing strategic games",
-                    "🎧 Listening to programming podcasts",
-                    "🌱 Learning new technologies"
-                  ].map((item, index) => (
-                    <li 
-                      key={index} 
-                      className="flex items-center space-x-2 hover:text-cyan-400 transition-colors duration-300 animate-slide-up opacity-0" 
-                      style={{ 
-                        animationDelay: `${600 + (index * 150)}ms`,
-                        animationFillMode: 'forwards'
-                      }}
-                    >
-                      <span className="transform hover:translate-x-2 transition-transform duration-300">
-                        {item}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
+            <div className="lg:w-2/3 space-y-6">
+              <div className="flex flex-wrap gap-4 mb-6">
+                <div className="flex-1 min-w-[200px] bg-[#1E293B]/50 p-4 rounded-lg border border-slate-700/50">
+                  <p className="text-slate-400 text-sm">Location</p>
+                  <p className="text-slate-200">Jakarta, Indonesia</p>
+                </div>
+                <div className="flex-1 min-w-[200px] bg-[#1E293B]/50 p-4 rounded-lg border border-slate-700/50">
+                  <p className="text-slate-400 text-sm">Experience</p>
+                  <p className="text-slate-200">5+ Years</p>
+                </div>
+                <div className="flex-1 min-w-[200px] bg-[#1E293B]/50 p-4 rounded-lg border border-slate-700/50">
+                  <p className="text-slate-400 text-sm">Specialization</p>
+                  <p className="text-slate-200">Full Stack Development</p>
+                </div>
               </div>
+              
+              <div className="space-y-4 text-lg text-slate-300">
+                <p className="leading-relaxed">
+                  I'm a software engineer specializing in building exceptional digital experiences. Currently, I'm focused on building accessible, human-centered products using modern web technologies.
+                </p>
+                <p className="leading-relaxed">
+                  With a strong foundation in both front-end and back-end development, I enjoy tackling complex problems and turning them into simple and beautiful solutions. My approach combines technical expertise with creative thinking to deliver outstanding results.
+                </p>
+                <div className="pt-4 flex gap-4">
+                  <a 
+                    href="/resume.pdf" 
+                    target="_blank"
+                    className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-gradient-to-r from-blue-500 to-cyan-500 text-white font-medium hover:from-blue-600 hover:to-cyan-600 transition-all duration-300 hover:scale-105"
+                  >
+                    View Resume
+                  </a>
+                  <a 
+                    href="mailto:revanp0@gmail.com"
+                    className="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-slate-700 text-slate-300 hover:border-cyan-400 hover:text-cyan-400 transition-all duration-300 hover:scale-105"
+                  >
+                    Contact Me
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Cards Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-20 reveal">
+            {aboutCards.map((card, index) => (
+              <div
+                key={card.title}
+                className="group relative"
+                style={{
+                  animationDelay: `${index * 100}ms`,
+                }}
+              >
+                <div className={`absolute -inset-0.5 bg-gradient-to-r ${card.gradient} rounded-lg blur opacity-25 group-hover:opacity-75 transition duration-500`}></div>
+                <div className="relative p-6 bg-[#1E293B] rounded-lg border border-slate-700/50 hover:border-transparent transition duration-300">
+                  <card.icon size={32} className={`mb-4 bg-gradient-to-r ${card.gradient} text-transparent fill-current`} />
+                  <h3 className="text-xl font-semibold text-slate-200 mb-2">{card.title}</h3>
+                  <p className="text-slate-400">{card.description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Timeline */}
+          <div className="max-w-4xl mx-auto reveal">
+            <div className="relative">
+              <div className="absolute left-1/2 transform -translate-x-px h-full w-0.5 bg-gradient-to-b from-cyan-400 via-blue-400 to-transparent"></div>
+              
+              {timelineEvents.map((event, index) => (
+                <div 
+                  key={event.year}
+                  className="relative mb-12 last:mb-0"
+                  style={{
+                    animationDelay: `${index * 200}ms`,
+                  }}
+                >
+                  <div className={`flex items-center ${index % 2 === 0 ? 'flex-row-reverse' : ''} group`}>
+                    <div className="flex-1 p-6">
+                      <div className={`bg-[#1E293B] p-6 rounded-lg border border-slate-700/50 transform transition duration-300 group-hover:scale-105 group-hover:border-cyan-400/50 ${index % 2 === 0 ? 'text-right' : ''}`}>
+                        <span className="text-sm text-cyan-400">{event.year}</span>
+                        <h3 className="text-xl font-semibold text-slate-200 mt-1">{event.title}</h3>
+                        <p className="text-slate-400 mt-1">{event.company}</p>
+                        <p className="text-slate-300 mt-2">{event.description}</p>
+                      </div>
+                    </div>
+                    <div className="w-12 h-12 rounded-full border-4 border-[#1E293B] bg-gradient-to-r from-blue-400 to-cyan-400 flex items-center justify-center transform transition duration-300 group-hover:scale-110 group-hover:rotate-180">
+                      <div className="w-2 h-2 bg-white rounded-full"></div>
+                    </div>
+                    <div className="flex-1"></div>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
