@@ -3,6 +3,10 @@ body {
   scroll-behavior: smooth;
   height: 100%;
   margin: 0;
+  background-color: #0F172A;
+  padding: 0;
+  min-height: 100vh;
+  overflow-x: hidden;
 }
 
 /* Improved smooth scroll */

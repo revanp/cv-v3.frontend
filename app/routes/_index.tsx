@@ -14,17 +14,17 @@ export const meta: MetaFunction = () => {
 
 export default function Index() {
   const skills = [
-    { icon: SiTypescript, name: 'TypeScript', color: 'from-blue-400 to-blue-600' },
-    { icon: SiJavascript, name: 'JavaScript', color: 'from-yellow-400 to-yellow-600' },
-    { icon: SiReact, name: 'React', color: 'from-cyan-400 to-cyan-600' },
-    { icon: SiNodedotjs, name: 'Node.js', color: 'from-green-400 to-green-600' },
-    { icon: SiPython, name: 'Python', color: 'from-blue-500 to-yellow-500' },
-    { icon: SiPhp, name: 'PHP', color: 'from-indigo-400 to-indigo-600' },
-    { icon: SiMysql, name: 'MySQL', color: 'from-orange-400 to-orange-600' },
-    { icon: SiMongodb, name: 'MongoDB', color: 'from-green-500 to-green-700' },
-    { icon: SiTailwindcss, name: 'Tailwind', color: 'from-teal-400 to-teal-600' },
-    { icon: SiGit, name: 'Git', color: 'from-red-400 to-red-600' },
-    { icon: SiDocker, name: 'Docker', color: 'from-blue-400 to-blue-700' },
+    { icon: SiTypescript, name: 'TypeScript', color: 'blue-400' },
+    { icon: SiJavascript, name: 'JavaScript', color: 'yellow-400' },
+    { icon: SiReact, name: 'React', color: 'cyan-400' },
+    { icon: SiNodedotjs, name: 'Node.js', color: 'green-400' },
+    { icon: SiPython, name: 'Python', color: 'blue-500' },
+    { icon: SiPhp, name: 'PHP', color: 'indigo-400' },
+    { icon: SiMysql, name: 'MySQL', color: 'orange-400' },
+    { icon: SiMongodb, name: 'MongoDB', color: 'green-500' },
+    { icon: SiTailwindcss, name: 'Tailwind', color: 'teal-400' },
+    { icon: SiGit, name: 'Git', color: 'red-400' },
+    { icon: SiDocker, name: 'Docker', color: 'blue-400' },
   ];
 
   const portfolios = Array(40).fill(null).map((_, index) => ({
@@ -48,25 +48,29 @@ export default function Index() {
       icon: BsCodeSlash,
       title: "Tech Enthusiast",
       description: "Passionate about clean code and innovative solutions",
-      gradient: "from-blue-400 to-cyan-400"
+      gradient: "from-blue-400 to-cyan-400",
+      color: "text-blue-400",
     },
     {
       icon: BsLightbulb,
       title: "Problem Solver",
       description: "Turning complex challenges into elegant solutions",
-      gradient: "from-purple-400 to-pink-400"
+      gradient: "from-purple-400 to-pink-400",
+      color: "text-purple-400",
     },
     {
       icon: BsRocket,
       title: "Fast Learner",
       description: "Always eager to explore new technologies",
-      gradient: "from-emerald-400 to-teal-400"
+      gradient: "from-emerald-400 to-teal-400",
+      color: "text-emerald-400",
     },
     {
       icon: BsHeart,
       title: "Team Player",
       description: "Collaborating to create amazing experiences",
-      gradient: "from-orange-400 to-red-400"
+      gradient: "from-orange-400 to-red-400",
+      color: "text-orange-400",
     }
   ];
 
@@ -121,8 +125,8 @@ export default function Index() {
   }, []);
 
   return (
-    <div className="content">
-      <section className="relative flex items-center justify-center bg-gradient-to-br from-[#0F172A] via-[#1E293B] to-[#0F172A]">
+    <div className="content min-h-screen w-full bg-[#0F172A] overflow-x-hidden">
+      <section className="min-h-screen relative flex items-center justify-center bg-gradient-to-br from-[#0F172A] via-[#1E293B] to-[#0F172A]">
         <div className="absolute inset-0 bg-grid-pattern opacity-5 parallax" data-speed="0.2"></div>
         
         <div className="floating-elements">
@@ -162,7 +166,7 @@ export default function Index() {
           </button>
         </div>
       </section>
-      <section className="relative flex items-center justify-center bg-gradient-to-br from-[#1E293B] via-[#0F172A] to-[#1E293B] overflow-hidden">
+      <section className="min-h-screen relative flex items-center justify-center bg-gradient-to-br from-[#1E293B] via-[#0F172A] to-[#1E293B]">
         <div className="absolute inset-0 bg-grid-pattern opacity-5 parallax" data-speed="0.3"></div>
         
         <div className="floating-elements">
@@ -203,7 +207,7 @@ export default function Index() {
                 </div>
                 <div className="flex-1 min-w-[200px] bg-[#1E293B]/50 p-4 rounded-lg border border-slate-700/50">
                   <p className="text-slate-400 text-sm">Experience</p>
-                  <p className="text-slate-200">5+ Years</p>
+                  <p className="text-slate-200">6 Years</p>
                 </div>
                 <div className="flex-1 min-w-[200px] bg-[#1E293B]/50 p-4 rounded-lg border border-slate-700/50">
                   <p className="text-slate-400 text-sm">Specialization</p>
@@ -213,10 +217,16 @@ export default function Index() {
               
               <div className="space-y-4 text-lg text-slate-300">
                 <p className="leading-relaxed">
-                  I'm a software engineer specializing in building exceptional digital experiences. Currently, I'm focused on building accessible, human-centered products using modern web technologies.
+                  I’m a fullstack developer passionate about creating impactful and memorable digital experiences. Right now, I’m focused on building user-friendly and accessible products using the latest web technologies.
                 </p>
                 <p className="leading-relaxed">
-                  With a strong foundation in both front-end and back-end development, I enjoy tackling complex problems and turning them into simple and beautiful solutions. My approach combines technical expertise with creative thinking to deliver outstanding results.
+                  With skills that span both front-end and back-end, I thrive on solving complex problems and turning them into clean, simple, and elegant solutions.
+                </p>
+                <p className="leading-relaxed">
+                  For me, coding isn’t just about the technical side—it’s also about creativity. I’m all about combining technical expertise with creative thinking to deliver work that doesn’t just function but truly stands out.
+                </p>
+                <p className="leading-relaxed">
+                  If you’re looking for someone who can tackle challenges while keeping things fun and laid-back, I’m your person! ✨
                 </p>
                 <div className="pt-4 flex gap-4">
                   <a 
@@ -249,7 +259,7 @@ export default function Index() {
               >
                 <div className={`absolute -inset-0.5 bg-gradient-to-r ${card.gradient} rounded-lg blur opacity-25 group-hover:opacity-75 transition duration-500`}></div>
                 <div className="relative p-6 bg-[#1E293B] rounded-lg border border-slate-700/50 hover:border-transparent transition duration-300">
-                  <card.icon size={32} className={`mb-4 bg-gradient-to-r ${card.gradient} text-transparent fill-current`} />
+                  <card.icon size={32} className={`mb-4 ${card.color}`} />
                   <h3 className="text-xl font-semibold text-slate-200 mb-2">{card.title}</h3>
                   <p className="text-slate-400">{card.description}</p>
                 </div>
@@ -290,7 +300,7 @@ export default function Index() {
           </div>
         </div>
       </section>
-      <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-[#1E293B] via-[#0F172A] to-[#1E293B] overflow-hidden py-20">
+      <section className="min-h-screen relative flex items-center justify-center bg-gradient-to-br from-[#1E293B] via-[#0F172A] to-[#1E293B] overflow-hidden py-20">
         <div className="absolute inset-0 bg-grid-pattern opacity-5 parallax" data-speed="0.4"></div>
         
         <div className="floating-elements">
@@ -314,8 +324,8 @@ export default function Index() {
                 }}
               >
                 <div className="absolute -inset-0.5 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-lg blur opacity-0 group-hover:opacity-75 transition duration-500"></div>
-                <div className="relative flex flex-col items-center p-6 bg-[#1E293B] rounded-lg border border-slate-700/50 transition duration-300 group-hover:border-cyan-400/50">
-                  <skill.icon size={48} className={`mb-4 bg-gradient-to-r ${skill.color} text-transparent fill-current transition-transform duration-300 group-hover:scale-110`} />
+                <div className={`relative flex flex-col items-center p-6 bg-[#1E293B] rounded-lg border border-slate-700/50 transition duration-300 group-hover:border-${skill.color}`}>
+                  <skill.icon size={48} className={`mb-4 text-${skill.color} fill-current transition-transform duration-300 group-hover:scale-110`} />
                   <span className="text-slate-300 group-hover:text-cyan-400 transition-colors duration-300">
                     {skill.name}
                   </span>
@@ -325,7 +335,7 @@ export default function Index() {
           </div>
         </div>
       </section>
-      <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-[#1E293B] via-[#0F172A] to-[#1E293B] overflow-hidden py-20">
+      <section className="min-h-screen relative flex items-center justify-center bg-gradient-to-br from-[#1E293B] via-[#0F172A] to-[#1E293B] overflow-hidden py-20">
         <div className="absolute inset-0 bg-grid-pattern opacity-5 parallax" data-speed="0.4"></div>
         
         <div className="floating-elements">
