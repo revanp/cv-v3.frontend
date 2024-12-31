@@ -129,7 +129,7 @@ export default function Index() {
       description: "Specialized in Web and Mobile Development"
     },
     {
-      year: "Soon 2028",
+      year: "soon 2028",
       title: "Information Systems",
       institution: "Universitas Terbuka Indonesia",
       description: "Bachelor's degree in Information Systems"
@@ -376,7 +376,7 @@ export default function Index() {
           </div>
         </div>
       </section>
-      <section className="min-h-screen relative flex items-center justify-center bg-gradient-to-br from-[#1E293B] via-[#0F172A] to-[#1E293B]">
+      <section className="min-h-screen relative flex items-center justify-center bg-gradient-to-br from-[#1E293B] via-[#0F172A] to-[#1E293B] overflow-hidden py-20">
         <div className="absolute inset-0 bg-grid-pattern opacity-5 parallax" data-speed="0.4"></div>
         
         <div className="floating-elements">

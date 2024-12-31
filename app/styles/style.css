@@ -25,6 +25,9 @@ section {
   scroll-margin-top: 0; /* Memastikan snap tepat di awal section */
   transition: opacity 0.2s ease-in-out; /* Reduced transition duration */
   will-change: transform, opacity;
+  display: flex; /* Ensure flexbox layout */
+  align-items: center; /* Center items vertically */
+  justify-content: center; /* Center items horizontally */
 }
 
 .content {
@@ -133,11 +136,37 @@ footer a:hover {
 }
 
 /* Timeline adjustments for mobile */
+.timeline {
+  position: relative;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(to bottom, #22D3EE, #3B82F6, transparent);
+}
+
 @media (max-width: 768px) {
+  .timeline::before {
+    left: 10%; /* Adjust the line to be closer to the timeline items */
+    transform: none; /* Remove the transform */
+  }
   .timeline .flex-row-reverse {
     flex-direction: row !important;
   }
   .timeline .text-right {
     text-align: left !important;
+  }
+  .timeline .flex-1 {
+    flex: none;
+    width: 100%;
+  }
+  .timeline .w-12 {
+    margin-left: auto;
+    margin-right: auto;
   }
 }
