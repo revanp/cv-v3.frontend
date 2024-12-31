@@ -23,7 +23,7 @@ section {
   min-height: 100vh; /* Tetap gunakan min-height agar konten bisa lebih panjang */
   position: relative;
   scroll-margin-top: 0; /* Memastikan snap tepat di awal section */
-  transition: opacity 0.5s ease-in-out;
+  transition: opacity 0.2s ease-in-out; /* Reduced transition duration */
   will-change: transform, opacity;
 }
 
@@ -33,6 +33,23 @@ section {
   height: 100vh;
   -webkit-overflow-scrolling: touch; /* Untuk dukungan iOS yang lebih baik */
   scroll-padding: 1px; /* This helps with smoother snapping */
+}
+
+footer {
+  scroll-snap-align: none; /* Exclude footer from scroll snapping */
+  background-color: #0F172A;
+  color: #94A3B8; /* Tailwind's slate-300 */
+  padding: 2rem 0;
+  text-align: center;
+}
+
+footer a {
+  color: inherit;
+  transition: color 0.3s ease;
+}
+
+footer a:hover {
+  color: #22D3EE; /* Tailwind's cyan-400 */
 }
 
 .animate-fade-in {
@@ -113,4 +130,14 @@ section {
 .parallax {
   transform: translateY(var(--parallax-y, 0));
   transition: transform 0.1s cubic-bezier(0.2, 0, 0, 1);
+}
+
+/* Timeline adjustments for mobile */
+@media (max-width: 768px) {
+  .timeline .flex-row-reverse {
+    flex-direction: row !important;
+  }
+  .timeline .text-right {
+    text-align: left !important;
+  }
 }
