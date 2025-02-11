@@ -1,9 +1,20 @@
 import type { MetaFunction } from "@remix-run/node";
 import { FaGithub, FaLinkedin, FaEnvelope, FaChevronDown, FaExternalLinkAlt } from 'react-icons/fa';
-import { BsChevronLeft, BsChevronRight, BsCodeSlash, BsLightbulb, BsRocket, BsHeart } from 'react-icons/bs';
+import { BsChevronLeft, BsChevronRight, BsCodeSlash, BsLightbulb, BsRocket, BsHeart, BsX } from 'react-icons/bs';
 import { SiTypescript, SiJavascript, SiReact, SiNodedotjs, SiPython, SiPhp, SiMysql, SiMongodb, SiTailwindcss, SiGit, SiDocker, SiApache, SiBootstrap, SiCodeigniter, SiCss3, SiSass, SiFlutter, SiJenkins, SiKubernetes, SiPostgresql, SiNginx, SiLinux, SiHtml5 } from 'react-icons/si';
 import { useState, useEffect } from 'react';
 import '../styles/style.css';
+import gsap from "gsap";
+import ScrollTrigger from "gsap/dist/ScrollTrigger";
+
+interface Project {
+  id: number;
+  title: string;
+  description: string;
+  tags: string[];
+  image: string;
+  link: string;
+}
 
 export const meta: MetaFunction = () => {
   return [
@@ -41,17 +52,76 @@ export default function Index() {
     { icon: SiHtml5, name: 'HTML', textColor: 'text-orange-500', color: 'orange-500' }
   ];
 
-  const portfolios = Array(40).fill(null).map((_, index) => ({
-    id: index + 1,
-    title: `Project ${index + 1}`,
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    tags: ['React', 'TypeScript', 'Node.js'].sort(() => Math.random() - 0.5).slice(0, 2),
-    image: `https://picsum.photos/seed/${index}/400/300`,
-    link: '#'
-  }));
+  const portfolios = [
+    {
+      id: 1,
+      title: "E-Commerce Platform",
+      description: "A full-featured e-commerce platform built with Next.js, featuring real-time inventory management, secure payment processing, and an intuitive admin dashboard.",
+      tags: ['Next.js', 'TypeScript', 'Node.js', 'PostgreSQL'],
+      image: "https://picsum.photos/seed/1/800/600",
+      link: '#'
+    },
+    {
+      id: 2,
+      title: "Banking Dashboard",
+      description: "A comprehensive banking dashboard that provides real-time analytics, transaction monitoring, and reporting tools for financial institutions.",
+      tags: ['React', 'Python', 'FastAPI', 'MongoDB'],
+      image: "https://picsum.photos/seed/2/800/600",
+      link: '#'
+    },
+    {
+      id: 3,
+      title: "IoT Management System",
+      description: "An IoT device management platform that enables real-time monitoring, data visualization, and remote device control for smart home systems.",
+      tags: ['Vue.js', 'Node.js', 'MQTT', 'InfluxDB'],
+      image: "https://picsum.photos/seed/3/800/600",
+      link: '#'
+    },
+    {
+      id: 4,
+      title: "HR Management System",
+      description: "A comprehensive HR management system with features for employee tracking, attendance management, and performance evaluation.",
+      tags: ['Laravel', 'MySQL', 'React', 'Redux'],
+      image: "https://picsum.photos/seed/4/800/600",
+      link: '#'
+    },
+    {
+      id: 5,
+      title: "Real Estate Platform",
+      description: "A modern real estate platform with virtual tours, property management, and advanced search capabilities.",
+      tags: ['Next.js', 'Three.js', 'Node.js', 'MongoDB'],
+      image: "https://picsum.photos/seed/5/800/600",
+      link: '#'
+    },
+    {
+      id: 6,
+      title: "Learning Management System",
+      description: "An educational platform featuring course management, student progress tracking, and interactive learning materials.",
+      tags: ['React', 'Django', 'PostgreSQL', 'Redis'],
+      image: "https://picsum.photos/seed/6/800/600",
+      link: '#'
+    },
+    {
+      id: 7,
+      title: "Healthcare Management",
+      description: "A healthcare management system for hospitals and clinics, featuring patient records, appointment scheduling, and billing management.",
+      tags: ['Vue.js', 'FastAPI', 'PostgreSQL', 'Docker'],
+      image: "https://picsum.photos/seed/7/800/600",
+      link: '#'
+    },
+    {
+      id: 8,
+      title: "Inventory System",
+      description: "An advanced inventory management system with real-time tracking, barcode scanning, and automated reordering capabilities.",
+      tags: ['React', 'Node.js', 'MongoDB', 'Socket.io'],
+      image: "https://picsum.photos/seed/8/800/600",
+      link: '#'
+    }
+  ];
 
   const [currentPage, setCurrentPage] = useState(0);
-  const itemsPerPage = 8;
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const itemsPerPage = 4;
   const totalPages = Math.ceil(portfolios.length / itemsPerPage);
 
   const nextPage = () => setCurrentPage((prev) => (prev + 1) % totalPages);
@@ -137,54 +207,55 @@ export default function Index() {
   ];
 
   useEffect(() => {
-    // Reveal animation on scroll
-    const observerReveal = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('active');
-        }
-      });
-    }, { threshold: 0.1 });
+    const initGSAP = async () => {
+      gsap.registerPlugin(ScrollTrigger);
 
-    document.querySelectorAll('.reveal').forEach((el) => observerReveal.observe(el));
+      // Hero section scroll animation
+      // gsap.to('.hero-section', {
+      //   scrollTrigger: {
+      //     trigger: '.hero-section',
+      //     start: "top top",
+      //     end: "bottom top",
+      //     scrub: 1,
+      //     markers: true,
+      //   },
+      //   opacity: 0,
+      //   y: -100,
+      //   scale: 0.9,
+      // });
+    }
 
-    // Parallax effect
-    const handleScroll = () => {
-      document.querySelectorAll('.parallax').forEach((el) => {
-        const speed = el.getAttribute('data-speed') || '-0.5';
-        const yPos = (window.pageYOffset * Number(speed));
-        el.style.setProperty('--parallax-y', `${yPos}px`);
-      });
-    };
-
-    window.addEventListener('scroll', handleScroll);
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-      observerReveal.disconnect();
-    };
+    initGSAP();
   }, []);
 
   return (
     <div className="content min-h-screen w-full bg-[#0F172A] overflow-x-hidden">
-      <section className="min-h-screen relative flex items-center justify-center bg-gradient-to-br from-[#0F172A] via-[#1E293B] to-[#0F172A]">
-        <div className="absolute inset-0 bg-grid-pattern opacity-5 parallax" data-speed="0.2"></div>
+      <section className="min-h-screen relative flex items-center justify-center bg-gradient-to-br from-[#0F172A] via-[#1E293B] to-[#0F172A] overflow-hidden hero-section">
+        <div className="absolute inset-0 bg-black z-[60] animate-[fadeOut_2s_ease-in-out_forwards]"></div>
         
-        <div className="floating-elements">
+        <div className="absolute inset-0 flex items-center justify-center z-[60] animate-[welcomeOut_2s_ease-in-out_forwards]">
+          <div className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-blue-400 via-cyan-400 to-teal-400 text-transparent bg-clip-text opacity-0 animate-[fadeInOut_2s_ease-in-out_forwards]">
+            Welcome
+          </div>
+        </div>
+
+        <div className="absolute inset-0 bg-grid-pattern opacity-0 parallax animate-[fadeIn_2s_ease-in-out_1s_forwards]" data-speed="0.2"></div>
+        
+        <div className="floating-elements opacity-0 animate-[fadeIn_2s_ease-in-out_1.5s_forwards]">
           <div className="absolute top-20 left-[20%] w-24 h-24 rounded-full bg-gradient-to-r from-blue-500/10 to-cyan-500/10 blur-xl floating-slow"></div>
           <div className="absolute bottom-20 right-[20%] w-32 h-32 rounded-full bg-gradient-to-r from-purple-500/10 to-pink-500/10 blur-xl floating-medium"></div>
           <div className="absolute top-1/3 right-[30%] w-16 h-16 rounded-full bg-gradient-to-r from-emerald-500/10 to-teal-500/10 blur-xl floating-fast"></div>
         </div>
 
-        <div className="text-center space-y-5 transform hover:scale-105 transition-transform duration-300 relative z-10 py-8 reveal">
-          <h1 className="text-6xl font-bold animate-fade-in bg-gradient-to-r from-blue-400 via-cyan-400 to-teal-400 text-transparent bg-clip-text leading-relaxed px-4">
+        <div className="text-center space-y-5 relative z-50 py-8 opacity-0 animate-[fadeIn_2s_ease-in-out_2s_forwards] translate-y-10">
+          <h1 className="text-6xl font-bold bg-gradient-to-r from-blue-400 via-cyan-400 to-teal-400 text-transparent bg-clip-text leading-relaxed px-4">
             Hello, I&apos;m Revan Pratama
           </h1>
-          <p className="text-2xl text-slate-300 animate-slide-up mt-8 px-4">
+          <p className="text-2xl text-slate-300 mt-8 px-4">
             Software Engineer crafting digital experiences
           </p>
           
-          <div className="flex gap-8 justify-center mt-12 animate-fade-in">
+          <div className="flex gap-8 justify-center mt-12">
             <a href="https://github.com/revanp" target="_blank" rel="noreferrer"
               className="text-slate-300 hover:text-cyan-400 transition-all duration-300 hover:scale-110 p-2">
               <FaGithub size={32} />
@@ -201,14 +272,72 @@ export default function Index() {
 
           <button 
             onClick={() => document.querySelector('section:nth-child(2)')?.scrollIntoView({ behavior: 'smooth' })}
-            className="animate-bounce fixed left-0 right-0 mx-auto text-slate-300 hover:text-cyan-400 transition-all duration-300 hover:scale-110 w-fit"
+            className="animate-bounce fixed left-0 right-0 mx-auto text-slate-300 hover:text-cyan-400 transition-all duration-300 hover:scale-110 w-fit opacity-0 animate-[fadeIn_1s_ease-in-out_3s_forwards]"
           >
             <FaChevronDown size={28} />
           </button>
         </div>
+
+        <style jsx>{`
+          @keyframes fadeOut {
+            from { 
+              opacity: 1;
+              pointer-events: auto;
+            }
+            to { 
+              opacity: 0;
+              visibility: hidden;
+              pointer-events: none;
+            }
+          }
+          
+          @keyframes welcomeOut {
+            0% { 
+              opacity: 1;
+              pointer-events: auto;
+              display: flex;
+            }
+            99% {
+              opacity: 0;
+              pointer-events: none;
+              display: flex;
+            }
+            100% { 
+              opacity: 0;
+              visibility: hidden;
+              pointer-events: none;
+              display: none;
+            }
+          }
+          
+          @keyframes fadeInOut {
+            0% { 
+              opacity: 0;
+              transform: scale(0.8);
+            }
+            50% { 
+              opacity: 1;
+              transform: scale(1);
+            }
+            100% { 
+              opacity: 0;
+            }
+          }
+          
+          @keyframes fadeIn {
+            from { 
+              opacity: 0;
+              pointer-events: none;
+            }
+            to { 
+              opacity: 1;
+              pointer-events: auto;
+            }
+          }
+        `}</style>
       </section>
       <section className="min-h-screen relative flex items-center justify-center bg-gradient-to-br from-[#1E293B] via-[#0F172A] to-[#1E293B]">
-        <div className="absolute inset-0 bg-grid-pattern opacity-5 parallax" data-speed="0.3"></div>
+        {/* <div className="absolute inset-0 bg-grid-pattern opacity-5 parallax" data-speed="0.3"></div> */}
         
         <div className="floating-elements">
           <div className="absolute top-[10%] right-[10%] w-24 h-24 rounded-full bg-gradient-to-r from-pink-500/10 to-purple-500/10 blur-xl floating-slow"></div>
@@ -216,17 +345,17 @@ export default function Index() {
         </div>
 
         <div className="max-w-7xl mx-auto px-4 py-20">
-          <div className="text-center mb-16 reveal">
-            <h2 className="text-5xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 text-transparent bg-clip-text">
+          <div className="text-center mb-16">
+            <h2 className="animate-on-scroll text-5xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 text-transparent bg-clip-text mb-8">
               About Me
             </h2>
-            <p className="text-slate-300 mt-4 text-lg">
+            <p className="animate-on-scroll text-slate-300 mt-4 text-lg">
               A passionate developer with a creative mindset
             </p>
           </div>
 
           {/* Personal Info Section - NEW */}
-          <div className="flex flex-col lg:flex-row items-center gap-12 mb-20 reveal">
+          <div className="flex flex-col lg:flex-row items-center gap-12 mb-20">
             <div className="lg:w-1/3">
               <div className="relative group">
                 <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-lg blur opacity-25 group-hover:opacity-75 transition duration-500"></div>
@@ -258,16 +387,16 @@ export default function Index() {
               
               <div className="space-y-4 text-lg text-slate-300">
                 <p className="leading-relaxed">
-                  I’m a fullstack developer passionate about creating impactful and memorable digital experiences. Right now, I’m focused on building user-friendly and accessible products using the latest web technologies.
+                  I&apos;m a fullstack developer passionate about creating impactful and memorable digital experiences. Right now, I&apos;m focused on building user-friendly and accessible products using the latest web technologies.
                 </p>
                 <p className="leading-relaxed">
                   With skills that span both front-end and back-end, I thrive on solving complex problems and turning them into clean, simple, and elegant solutions.
                 </p>
                 <p className="leading-relaxed">
-                  For me, coding isn’t just about the technical side—it’s also about creativity. I’m all about combining technical expertise with creative thinking to deliver work that doesn’t just function but truly stands out.
+                  For me, coding isn&apos;t just about the technical side—it&apos;s also about creativity. I&apos;m all about combining technical expertise with creative thinking to deliver work that doesn&apos;t just function but truly stands out.
                 </p>
                 <p className="leading-relaxed">
-                  If you’re looking for someone who can tackle challenges while keeping things fun and laid-back, I’m your person! ✨
+                  If you&apos;re looking for someone who can tackle challenges while keeping things fun and laid-back, I&apos;m your person! ✨
                 </p>
                 <div className="pt-4 flex gap-4">
                   <a 
@@ -289,7 +418,7 @@ export default function Index() {
           </div>
 
           {/* Cards Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-20 reveal">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-20">
             {aboutCards.map((card, index) => (
                 <div
                 key={card.title}
@@ -298,18 +427,18 @@ export default function Index() {
                   animationDelay: `${index * 100}ms`,
                 }}
                 >
-                <div className={`absolute -inset-0.5 bg-gradient-to-r ${card.gradient} rounded-lg blur opacity-25 group-hover:opacity-75 transition duration-500`}></div>
-                <div className="relative p-6 bg-[#1E293B] rounded-lg border border-slate-700/50 hover:border-transparent transition duration-300 h-full flex flex-col">
-                  <card.icon size={32} className={`mb-4 ${card.color}`} />
-                  <h3 className="text-xl font-semibold text-slate-200 mb-2">{card.title}</h3>
-                  <p className="text-slate-400 flex-grow">{card.description}</p>
-                </div>
+                  <div className={`absolute -inset-0.5 bg-gradient-to-r ${card.gradient} rounded-lg blur opacity-25 group-hover:opacity-75 transition duration-500`}></div>
+                  <div className="relative p-6 bg-[#1E293B] rounded-lg border border-slate-700/50 hover:border-transparent transition duration-300 h-full flex flex-col">
+                    <card.icon size={32} className={`mb-4 ${card.color}`} />
+                    <h3 className="text-xl font-semibold text-slate-200 mb-2">{card.title}</h3>
+                    <p className="text-slate-400 flex-grow">{card.description}</p>
+                  </div>
                 </div>
             ))}
           </div>
 
           {/* Timeline */}
-          <div className="max-w-4xl mx-auto reveal">
+          <div className="max-w-4xl mx-auto">
             <div className="relative">
               <div className="absolute left-1/2 transform -translate-x-px h-full w-0.5 bg-gradient-to-b from-cyan-400 via-blue-400 to-transparent"></div>
               
@@ -341,16 +470,104 @@ export default function Index() {
           </div>
         </div>
       </section>
+
+      <section className="min-h-screen relative flex items-center justify-center bg-gradient-to-br from-[#1E293B] via-[#0F172A] to-[#1E293B] py-20">
+        {/* <div className="absolute inset-0 bg-grid-pattern opacity-5 parallax" data-speed="0.3"></div> */}
+        
+        <div className="floating-elements">
+          <div className="absolute top-[10%] right-[10%] w-24 h-24 rounded-full bg-gradient-to-r from-pink-500/10 to-purple-500/10 blur-xl floating-slow"></div>
+          <div className="absolute bottom-[10%] left-[10%] w-32 h-32 rounded-full bg-gradient-to-r from-blue-500/10 to-cyan-500/10 blur-xl floating-medium"></div>
+        </div>
+
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="animate-on-scroll text-5xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 text-transparent bg-clip-text mb-8">
+              Portfolio
+            </h2>
+            <p className="text-slate-300 text-lg">
+              Check out some of my recent projects
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 mb-8">
+            {portfolios.slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage).map((project) => (
+              <button
+                key={project.id}
+                className="group bg-[#1E293B]/50 rounded-xl overflow-hidden transform hover:scale-105 transition-all duration-300 text-left focus:outline-none focus:ring-2 focus:ring-cyan-400 border border-slate-700/50 hover:border-cyan-400/50"
+                onClick={() => setSelectedProject(project)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    setSelectedProject(project);
+                  }
+                }}
+              >
+                <div className="relative aspect-video overflow-hidden">
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent">
+                  </div>
+                </div>
+                <div className="p-6">
+                  <h3 className="text-xl font-semibold text-white mb-3">{project.title}</h3>
+                  <p className="text-slate-300 text-sm mb-4 line-clamp-2">{project.description}</p>
+                  <div className="flex flex-wrap gap-2">
+                    {project.tags.map((tag, index) => (
+                      <span key={index} className="px-2 py-1 text-xs bg-blue-500/20 text-blue-300 rounded-full">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </button>
+            ))}
+          </div>
+
+          <div className="flex justify-center items-center gap-6 mt-12">
+            <button
+              onClick={prevPage}
+              className="p-3 text-slate-300 hover:text-cyan-400 transition-colors disabled:opacity-50 disabled:cursor-not-allowed bg-[#1E293B]/50 rounded-lg hover:bg-[#1E293B] border border-slate-700/50 hover:border-cyan-400/50"
+              disabled={currentPage === 0}
+            >
+              <BsChevronLeft size={20} />
+            </button>
+            <div className="flex items-center gap-3">
+              {Array.from({ length: totalPages }).map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setCurrentPage(index)}
+                  className={`h-2.5 rounded-full transition-all duration-300 ${
+                    currentPage === index 
+                      ? 'w-10 bg-gradient-to-r from-blue-400 to-cyan-400' 
+                      : 'w-2.5 bg-slate-600 hover:bg-slate-500'
+                  }`}
+                  aria-label={`Go to page ${index + 1}`}
+                />
+              ))}
+            </div>
+            <button
+              onClick={nextPage}
+              className="p-3 text-slate-300 hover:text-cyan-400 transition-colors disabled:opacity-50 disabled:cursor-not-allowed bg-[#1E293B]/50 rounded-lg hover:bg-[#1E293B] border border-slate-700/50 hover:border-cyan-400/50"
+              disabled={currentPage === totalPages - 1}
+            >
+              <BsChevronRight size={20} />
+            </button>
+          </div>
+        </div>
+      </section>
+      
       <section className="min-h-screen relative flex items-center justify-center bg-gradient-to-br from-[#1E293B] via-[#0F172A] to-[#1E293B] overflow-hidden py-20">
-        <div className="absolute inset-0 bg-grid-pattern opacity-5 parallax" data-speed="0.4"></div>
+        {/* <div className="absolute inset-0 bg-grid-pattern opacity-5 parallax" data-speed="0.4"></div> */}
         
         <div className="floating-elements">
           <div className="absolute top-[20%] left-[15%] w-28 h-28 rounded-full bg-gradient-to-r from-blue-500/10 to-cyan-500/10 blur-xl floating-slow"></div>
           <div className="absolute bottom-[20%] right-[15%] w-36 h-36 rounded-full bg-gradient-to-r from-purple-500/10 to-pink-500/10 blur-xl floating-medium"></div>
         </div>
 
-        <div className="max-w-6xl mx-auto px-4 reveal">
-          <h2 className="text-4xl font-bold text-center bg-gradient-to-r from-blue-400 to-cyan-400 text-transparent bg-clip-text mb-16 animate-fade-in">
+        <div className="max-w-6xl mx-auto px-4">
+          <h2 className="animate-on-scroll text-4xl font-bold text-center bg-gradient-to-r from-blue-400 to-cyan-400 text-transparent bg-clip-text mb-16">
             My Skills
           </h2>
           
@@ -376,20 +593,20 @@ export default function Index() {
           </div>
         </div>
       </section>
-      <section className="min-h-screen relative flex items-center justify-center bg-gradient-to-br from-[#1E293B] via-[#0F172A] to-[#1E293B] overflow-hidden py-20">
-        <div className="absolute inset-0 bg-grid-pattern opacity-5 parallax" data-speed="0.4"></div>
+      <section className="min-h-screen relative flex items-center justify-center bg-gradient-to-br from-[#1E293B] via-[#0F172A] to-[#1E293B] py-20">
+        {/* <div className="absolute inset-0 bg-grid-pattern opacity-5 parallax" data-speed="0.4"></div> */}
         
         <div className="floating-elements">
           <div className="absolute top-[20%] left-[15%] w-28 h-28 rounded-full bg-gradient-to-r from-blue-500/10 to-cyan-500/10 blur-xl floating-slow"></div>
           <div className="absolute bottom-[20%] right-[15%] w-36 h-36 rounded-full bg-gradient-to-r from-purple-500/10 to-pink-500/10 blur-xl floating-medium"></div>
         </div>
 
-        <div className="max-w-6xl mx-auto px-4 reveal">
-          <h2 className="text-4xl font-bold text-center bg-gradient-to-r from-blue-400 to-cyan-400 text-transparent bg-clip-text mb-16 animate-fade-in">
+        <div className="max-w-6xl mx-auto px-4">
+          <h2 className="animate-on-scroll text-4xl font-bold text-center bg-gradient-to-r from-blue-400 to-cyan-400 text-transparent bg-clip-text mb-16">
             Education
           </h2>
           
-          <div className="max-w-4xl mx-auto reveal">
+          <div className="max-w-4xl mx-auto">
             <div className="relative">
               <div className="absolute left-1/2 transform -translate-x-px h-full w-0.5 bg-gradient-to-b from-cyan-400 via-blue-400 to-transparent"></div>
               
@@ -421,6 +638,46 @@ export default function Index() {
           </div>
         </div>
       </section>
+
+      {/* Project Modal */}
+      {selectedProject && (
+        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-[#1E293B] rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+            <div className="relative aspect-video">
+              <img
+                src={selectedProject.image}
+                alt={selectedProject.title}
+                className="w-full h-full object-cover"
+              />
+              <button
+                onClick={() => setSelectedProject(null)}
+                className="absolute top-4 right-4 w-10 h-10 rounded-full bg-black/50 text-white flex items-center justify-center hover:bg-black/70 transition-colors"
+              >
+                <BsX size={24} />
+              </button>
+            </div>
+            <div className="p-8">
+              <h3 className="text-2xl font-bold text-white mb-4">{selectedProject.title}</h3>
+              <p className="text-slate-300 mb-6">{selectedProject.description}</p>
+              <div className="flex flex-wrap gap-2 mb-6">
+                {selectedProject.tags.map((tag, index) => (
+                  <span key={index} className="px-3 py-1 bg-blue-500/20 text-blue-300 rounded-full">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+              <a
+                href={selectedProject.link}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-gradient-to-r from-blue-500 to-cyan-500 text-white font-medium hover:from-blue-600 hover:to-cyan-600 transition-all duration-300 hover:scale-105"
+              >
+                View Project <FaExternalLinkAlt size={14} />
+              </a>
+            </div>
+          </div>
+        </div>
+      )}
 
       <footer className="bg-[#0F172A] text-slate-300 py-8">
         <div className="max-w-7xl mx-auto px-4 text-center">

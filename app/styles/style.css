@@ -18,8 +18,8 @@ body {
 }
 
 section {
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
+  /* scroll-snap-align: start;
+  scroll-snap-stop: always; */
   min-height: 100vh; /* Tetap gunakan min-height agar konten bisa lebih panjang */
   position: relative;
   scroll-margin-top: 0; /* Memastikan snap tepat di awal section */
