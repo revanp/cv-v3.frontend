@@ -4,8 +4,8 @@ import { BsChevronLeft, BsChevronRight, BsCodeSlash, BsLightbulb, BsRocket, BsHe
 import { SiTypescript, SiJavascript, SiReact, SiNodedotjs, SiPython, SiPhp, SiMysql, SiMongodb, SiTailwindcss, SiGit, SiDocker, SiApache, SiBootstrap, SiCodeigniter, SiCss3, SiSass, SiFlutter, SiJenkins, SiKubernetes, SiPostgresql, SiNginx, SiLinux, SiHtml5 } from 'react-icons/si';
 import { useState, useEffect } from 'react';
 import '../styles/style.css';
-import gsap from "gsap";
-import ScrollTrigger from "gsap/dist/ScrollTrigger";
+// import gsap from "gsap";
+// import ScrollTrigger from "gsap/dist/ScrollTrigger";
 
 interface Project {
   id: number;
@@ -206,27 +206,27 @@ export default function Index() {
     }
   ];
 
-  useEffect(() => {
-    const initGSAP = async () => {
-      gsap.registerPlugin(ScrollTrigger);
+  // useEffect(() => {
+  //   const initGSAP = async () => {
+  //     gsap.registerPlugin(ScrollTrigger);
 
-      // Hero section scroll animation
-      // gsap.to('.hero-section', {
-      //   scrollTrigger: {
-      //     trigger: '.hero-section',
-      //     start: "top top",
-      //     end: "bottom top",
-      //     scrub: 1,
-      //     markers: true,
-      //   },
-      //   opacity: 0,
-      //   y: -100,
-      //   scale: 0.9,
-      // });
-    }
+  //     // Hero section scroll animation
+  //     // gsap.to('.hero-section', {
+  //     //   scrollTrigger: {
+  //     //     trigger: '.hero-section',
+  //     //     start: "top top",
+  //     //     end: "bottom top",
+  //     //     scrub: 1,
+  //     //     markers: true,
+  //     //   },
+  //     //   opacity: 0,
+  //     //   y: -100,
+  //     //   scale: 0.9,
+  //     // });
+  //   }
 
-    initGSAP();
-  }, []);
+  //   initGSAP();
+  // }, []);
 
   return (
     <div className="content min-h-screen w-full bg-[#0F172A] overflow-x-hidden">
