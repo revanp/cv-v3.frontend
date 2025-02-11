@@ -21,4 +21,22 @@ export default defineConfig({
     }),
     tsconfigPaths(),
   ],
+  optimizeDeps: {
+    include: ['gsap', 'gsap/dist/gsap', 'gsap/dist/ScrollTrigger']
+  },
+  resolve: {
+    mainFields: [
+      'browser', 'module', 'main'
+    ]
+  },
+  build: {
+    rollupOptions: {
+      output: {
+        // manualChunks: {
+        //   gsap: ['gsap', 'gsap/dist/ScrollTrigger']
+        // }
+        manualChunks: undefined,
+      }
+    }
+  }
 });
